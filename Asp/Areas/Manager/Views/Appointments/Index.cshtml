@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Appointment>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> userManager;
+@{
+	ViewData["Title"] = "Apartment";
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Apartment</h6>
+		<a class="btn btn-info btn-sm d-inline text-dark float-right" asp-action="Add"><i class="fas fa-plus"></i> Add Apartment</a>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>@Html.DisplayNameFor(model => model.Date)</th>
+						<th>@Html.DisplayNameFor(model => model.TenantId)</th>
+						<th>@Html.DisplayNameFor(model => model.ManagerId)</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>@Html.DisplayNameFor(model => model.Date)</th>
+						<th>@Html.DisplayNameFor(model => model.TenantId)</th>
+						<th>@Html.DisplayNameFor(model => model.ManagerId)</th>
+						<th>Actions</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						var tenant = await userManager.FindByIdAsync(item.TenantId);
+						var manager = await userManager.FindByIdAsync(item.ManagerId);
+
+						<tr>
+							<td>@Html.DisplayFor(model => item.Date)</td>
+							<td>@tenant.Email</td>
+							<td>@manager.Email</td>
+							<td>
+								<a class="btn btn-amber btn-rounded btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+								<a class="btn btn-light-blue btn-rounded btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+								<a class="btn btn-red btn-rounded btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+							</td>
+
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+@section Css{
+	<link href="~/css/datatable.css" />
+}
+
+@section Scripts{
+	<script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
+	<script src="~/js/datatable.js"></script>
+}

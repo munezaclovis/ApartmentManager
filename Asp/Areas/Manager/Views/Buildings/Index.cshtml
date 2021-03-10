@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Asp.Models.Building>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Buildings</h6>
+		<a class="btn btn-info btn-sm d-inline text-dark float-right" asp-action="Add"><i class="fas fa-plus"> Add User</i></a>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.Address)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.City)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.State)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Country)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.PostalCode)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Status)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.Address)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.City)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.State)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Country)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.PostalCode)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Status)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.Address)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.City)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.State)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Country)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.PostalCode)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Status)
+							</td>
+							<td>
+								<a class="btn btn-amber btn-rounded btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+								<a class="btn btn-light-blue btn-rounded btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+								@if (item.Status == "A")
+								{
+									<a class="btn btn-red btn-rounded btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+								}
+								else
+								{
+									<a class="btn btn-pink btn-rounded btn-sm" asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+@section Css{
+	<link href="~/css/datatable.css" />
+}
+
+@section Scripts{
+	<script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
+	<script src="~/js/datatable.js"></script>
+}

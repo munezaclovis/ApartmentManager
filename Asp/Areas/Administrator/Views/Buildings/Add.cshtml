@@ -1,0 +1,25 @@
+﻿@model Asp.Models.Building
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add</h1>
+
+<h4>Building</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+		<form asp-action="Add">
+			<partial name="Shared/Form" />
+		</form>
+    </div>
+</div>
+<div class="py-1"></div>
+<div>
+	<a class="btn btn-elegant" asp-action="Index">Back to List</a>
+</div>
+<div class="py-1"></div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

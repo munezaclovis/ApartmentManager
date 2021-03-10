@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Message>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+<h2>Received Messages</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Text)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Date)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Sender)
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Message item in ViewBag.ReceivedMessages)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Text)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Date)
+				</td>
+				<td>
+					@{ var user = await UserManager.FindByIdAsync(item.Sender);}
+					@user.Email
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<br />
+
+<h2>Sent Messages</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Text)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Date)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Receiver)
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Message item in ViewBag.SentMessages)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Text)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Date)
+				</td>
+				<td>
+					@{ var user = await UserManager.FindByIdAsync(item.Receiver);}
+					@user.Email
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

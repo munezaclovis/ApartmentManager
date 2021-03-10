@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Appointment
+<div>
+	<h4>Building</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Date)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Date)
+		</dd>
+		@Html.DisplayNameFor(model => model.TenantId)
+		</dt>
+		<dd class="col-sm-10">
+			@ViewBag.TenantId
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.ManagerId)
+		</dt>
+		<dd class="col-sm-10">
+			@ViewBag.ManagerId
+		</dd>
+	</dl>
+</div>

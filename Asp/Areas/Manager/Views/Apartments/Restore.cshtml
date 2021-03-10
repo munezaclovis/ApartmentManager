@@ -1,0 +1,14 @@
+﻿@model Apartment
+@{
+	ViewData["Title"] = "Restore";
+}
+
+<h1>Restore</h1>
+
+<partial name="Shared/Details" />
+
+<form asp-action="Restore">
+	<input type="hidden" asp-for="Id" />
+	<input type="submit" value="Restore" class="btn btn-pink" /> |
+	<a class="btn btn-elegant" asp-action="Index">Back to List</a>
+</form>

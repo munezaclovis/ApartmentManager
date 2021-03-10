@@ -1,0 +1,118 @@
+﻿@model List<Message>
+@{
+	ViewData["Title"] = "Messages";
+}
+
+<div class="page-content">
+
+	<div class="container-fluid">
+		<!-- Page-Title -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-title-box">
+					<h4 class="page-title">Chat</h4>
+				</div><!--end page-title-box-->
+			</div><!--end col-->
+		</div>
+		<!-- end page title end breadcrumb -->
+		<div class="row">
+			<div class="col-12">
+				<div class="chat-box-left">
+					<div class="tab-content chat-list slimscroll">
+					@if(Model != null)
+					{
+						foreach(var item in Model)
+						{
+							<div class="fade show">
+								<a asp-route-id="" class="media new-message">
+									<div class="media-left">
+										<img src="../assets/images/users/user-1.jpg" alt="user" class="rounded-circle thumb-md">
+										<span class="round-10 bg-success"></span>
+									</div>
+									<div class="media-body">
+										<div class="d-inline-block">
+											<h6>Daniel Madsen</h6>
+											<p>Good morning! Congratulations Friend...</p>
+										</div>
+										<div>
+											<span>20 Feb</span>
+											<span>3</span>
+										</div>
+									</div>
+								</a>
+							</div>
+						}
+					}
+					</div>
+				</div>
+				<div class="chat-box-right">
+					<div class="chat-header">
+						<a href="" class="media">
+							<div class="media-body">
+								<div>
+									<h6 class="mb-1 mt-0">Mary Schneider</h6>
+								</div>
+							</div><!-- end media-body -->
+						</a><!--end media-->
+					</div><!-- end chat-header -->
+					<div class="chat-body ">
+						<div class="chat-detail slimscroll" id="chat">
+							@if (Model != null)
+							{
+								string position = string.Empty;
+							@foreach (var message in Model)
+								{
+							<div class="media">
+								<div class="media-body @position">
+									<div class="chat-msg" id="">
+										<p>Good Morning !</p>
+									</div>
+									<div class="chat-msg">
+										<p>
+											It is a long established fact that a reader will be distracted by
+											the readable content of a page when looking at its layout.
+											The point of using Lorem Ipsum is that it has a more-or-less normal
+											distribution of letters, as opposed to using 'Content here.
+										</p>
+									</div>
+									<div class="chat-msg">
+										<p>Ok</p>
+									</div>
+								</div><!--end media-body-->
+							</div>  <!--end media-->
+								}
+							}
+						</div>  <!-- end chat-detail -->
+					</div><!-- end chat-body -->
+					<div class="chat-footer">
+						<div class="container">
+							<form asp-action="Send" data-ajax="true" class="form-inline row" id="messageForm">
+								<input class="form-control col" id="messageInputBox" placeholder="Enter your Message...">
+								@*<button class="text-black btn btn-md btn-outline-default col font-15" style="max-width:20px"><i class="fas fa-paper-plane"></i></button>*@
+							</form>
+						</div><!-- end row -->
+					</div><!-- end chat-footer -->
+				</div><!--end chat-box-right -->
+			</div> <!-- end col -->
+		</div><!-- end row -->
+
+	</div><!-- container -->
+</div>
+<div class="py-3"></div>
+
+@section Css{
+	<link rel="stylesheet" href="~/lib/metrica/css/style.css">
+	<link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css" />
+}
+
+@*@section Scripts{
+		<script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+		<script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
+		<script src="~/js/datatable.js"></script>
+	}*@
+
+
+@section Scripts{
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+	<script src="~/js/chat.js"></script>
+}
